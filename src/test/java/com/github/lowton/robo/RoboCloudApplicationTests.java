@@ -1,10 +1,10 @@
-package com.github.lowton.tacos;
+package com.github.lowton.robo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TacoCloudApplicationTests {
+class RoboCloudApplicationTests {
 
 	@Test
 	void contextLoads() {

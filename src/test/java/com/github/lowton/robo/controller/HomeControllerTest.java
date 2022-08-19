@@ -1,4 +1,4 @@
-package com.github.lowton.tacos.controller;
+package com.github.lowton.robo.controller;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;

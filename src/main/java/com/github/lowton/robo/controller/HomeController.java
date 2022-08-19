@@ -1,4 +1,4 @@
-package com.github.lowton.tacos.controller;
+package com.github.lowton.robo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
