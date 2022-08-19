@@ -1,24 +1,27 @@
 package com.github.lowton.robo.controller;
 
-import org.hamcrest.Matchers;
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest(HomeController.class)
-public class HomeControllerTest {
+class HomeControllerTest {
     
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     void testHomePage() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/"))
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.view().name("home"))
-        .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("Hello at ")));
+        mockMvc.perform(get("/"))
+        .andExpect(status().isOk())
+        .andExpect(view().name("home"))
+        .andExpect(content().string(containsString("Hello at ")));
     }
 }
