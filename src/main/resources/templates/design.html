@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Robo-Cloud - Design</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<h1>Design your robot!</h1>
+<form method="POST" th:object="${robot}">
+    <div class="grid">
+        <div class="item-group" id="bodies">
+            <h3>Designate your body:</h3>
+            <div th:each="item : ${body}">
+                <input type="checkbox"
+                       th:field="*{components}"
+                       th:value="${item.id}"/>
+                <span th:text="${item.name}">ITEM</span><br/>
+            </div>
+        </div>
+        <div class="item-group" id="controllers">
+            <h3>Pick your controller:</h3>
+            <div th:each="item : ${controller}">
+                <input type="checkbox"
+                       th:field="*{components}"
+                       th:value="${item.id}"/>
+                <span th:text="${item.name}">ITEM</span><br/>
+            </div>
+        </div>
+        <div class="item-group" id=chassis>
+            <h3>Choose your chassis:</h3>
+            <div th:each="item : ${chassis}">
+                <input type="checkbox"
+                       th:field="*{components}"
+                       th:value="${item.id}"/>
+                <span th:text="${item.name}">ITEM</span><br/>
+            </div>
+        </div>
+        <div class="item-group" id="manipulators">
+            <h3>Determine your manipulator:</h3>
+            <div th:each="item : ${manipulator}">
+                <input type="checkbox"
+                       th:field="*{components}"
+                       th:value="${item.id}"/>
+                <span th:text="${item.name}">ITEM</span><br/>
+            </div>
+        </div>
+        <div class="item-group" id="power-sources">
+            <h3>Select your power source:</h3>
+            <div th:each="item : ${power_source}">
+                <input type="checkbox"
+                       th:field="*{components}"
+                       th:value="${item.id}"/>
+                <span th:text="${item.name}">ITEM</span><br/>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>Name your robot creation:</h3>
+        <input type="text" th:field="*{name}"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('components')}"
+              th:errors="*{components}">Components Error</span>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('name')}"
+              th:errors="*{name}">Name Error</span>
+        <br/>
+        <button>Submit Your Robot</button>
+    </div>
+</form>
+</body>
+</html>
