@@ -6,14 +6,18 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
 import com.github.lowton.robo.repository.ItemRef;
 import lombok.Data;
 
 @Data
+@Table
 public class Robot {
 	
+	@Id
 	private Long id;
-	
 	private Date createdAt;
 	
 	@NotNull
