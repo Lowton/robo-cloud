@@ -1,5 +1,6 @@
 package com.github.lowton.robo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.github.lowton.robo.component.Item;
 import com.github.lowton.robo.component.Robot;
 import com.github.lowton.robo.component.RobotOrder;
+import com.github.lowton.robo.repository.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -23,20 +25,17 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/design")
 @SessionAttributes("robotOrder")
 public class DesignRobotController {
+	
+	private final ItemRepository itemRepository;
+	
+	public DesignRobotController(final ItemRepository itemRepository) {
+		this.itemRepository = itemRepository;
+	}
+	
 	@ModelAttribute
 	public void addComponentsToModel(Model model) {
-		List<Item> components = List.of(
-				new Item("SBB", "Square box", Item.Type.BODY),
-				new Item("CB", "Cylinder", Item.Type.BODY),
-				new Item("CPUBT", "Baical Titan", Item.Type.CONTROLLER),
-				new Item("CPUP", "Intel Pentium", Item.Type.CONTROLLER),
-				new Item("TC", "Trucks", Item.Type.CHASSIS),
-				new Item("WC", "Wheels", Item.Type.CHASSIS),
-				new Item("AM", "Arm", Item.Type.MANIPULATOR),
-				new Item("TAM", "Telescopic arm", Item.Type.MANIPULATOR),
-				new Item("NPS", "Nuclear power supply", Item.Type.POWER_SOURCE),
-				new Item("ZCB", "Zinc-carbon battery", Item.Type.POWER_SOURCE)
-		);
+		var components = new ArrayList<Item>();
+		itemRepository.findAll().forEach(components::add);
 	
 		for (var type: Item.Type.values()) {
 			model.addAttribute(type.toString().toLowerCase(), filterByType(components, type));

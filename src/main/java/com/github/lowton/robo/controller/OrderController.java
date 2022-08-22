@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.github.lowton.robo.component.RobotOrder;
+import com.github.lowton.robo.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -18,6 +19,12 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/orders")
 @SessionAttributes("robotOrder")
 public class OrderController {
+	
+	private OrderRepository orderRepository;
+	
+	public OrderController(final OrderRepository orderRepository) {
+		this.orderRepository = orderRepository;
+	}
 	
 	@GetMapping("/current")
 	public String orderForm() {
@@ -30,6 +37,7 @@ public class OrderController {
 			return "order-form";
 		}
 		log.info("Order submitted: {}", order);
+		orderRepository.save(order);
 		sessionStatus.setComplete();
 		return "redirect:/";
 	}
