@@ -1,4 +1,6 @@
 spring:
-  datasource:
-    generate-unique-name: false
-    name: robocloud
+  data:
+    cassandra:
+      keyspace-name: robocloud
+      schema-action: recreate
+      local-datacenter: datacenter1

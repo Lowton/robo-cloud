@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.github.lowton.robo.component.Item;
 import com.github.lowton.robo.component.Robot;
 import com.github.lowton.robo.component.RobotOrder;
+import com.github.lowton.robo.component.udt.RobotUDT;
 import com.github.lowton.robo.repository.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,7 +71,7 @@ public class DesignRobotController {
 		}
 		
 		log.info("Processing robot: {}", robot);
-		robotOrder.addRobot(robot);
+		robotOrder.addRobot(new RobotUDT(robot.getName(), robot.getComponents()));
 		return "redirect:/orders/current";
 	}
 }

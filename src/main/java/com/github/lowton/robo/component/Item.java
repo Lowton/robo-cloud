@@ -1,20 +1,16 @@
 package com.github.lowton.robo.component;
 
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@Entity
 @AllArgsConstructor
-@NoArgsConstructor(access= AccessLevel.PROTECTED, force = true)
+@Table("components")
 public class Item {
-	@Id
+	@PrimaryKey
 	private final String id;
 	private final String name;
 	private final Type type;
