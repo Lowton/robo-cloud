@@ -28,7 +28,6 @@ public class RunnerConfig {
 				new Item("NPS", "Nuclear power supply", Item.Type.POWER_SOURCE),
 				new Item("ZCB", "Zinc-carbon battery", Item.Type.POWER_SOURCE)
 		);
-		log.info("Data loader loads {}", list);
-		return args -> repo.saveAll(list);
+		return args -> log.info("Data loader loads {}", repo.saveAll(list));
 	}
 }

@@ -1,31 +1,28 @@
 package com.github.lowton.robo.component;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.datastax.oss.driver.api.core.uuid.Uuids;
-import com.github.lowton.robo.component.udt.RobotUDT;
 import lombok.Data;
 
 @Data
-@Table("orders")
-public class RobotOrder {
+@Document(collection = "orders")
+public class RobotOrder implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
-	@PrimaryKey
-	private UUID id = Uuids.timeBased();
+
+	@Id
+	private String id;
 	
 	private Date placedAt = new Date();
 	
@@ -53,10 +50,9 @@ public class RobotOrder {
 	@Digits(integer = 3, fraction = 0, message = "Invalid CVV")
 	private String ccCVV;
 	
-	@Column("robots")
-	private List<RobotUDT> robots = new ArrayList<>();
+	private List<Robot> robots = new ArrayList<>();
 	
-	public void addRobot(RobotUDT robot) {
+	public void addRobot(Robot robot) {
 		robots.add(robot);
 	}
 }

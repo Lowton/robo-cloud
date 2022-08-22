@@ -1,16 +1,16 @@
 package com.github.lowton.robo.component;
 
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@Document(collection = "components")
 @AllArgsConstructor
-@Table("components")
 public class Item {
-	@PrimaryKey
+	@Id
 	private final String id;
 	private final String name;
 	private final Type type;

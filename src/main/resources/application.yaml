@@ -1,6 +1,7 @@
 spring:
+  mongodb:
+    embedded:
+      version: 5.0.6
   data:
-    cassandra:
-      keyspace-name: robocloud
-      schema-action: recreate
-      local-datacenter: datacenter1
+    mongodb:
+      username: robocloud
